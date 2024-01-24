@@ -1,17 +1,12 @@
-const app = require("./server")
-require("./database")
-const {Materia} = require("../models/materia")
+const { server } = require("./server")
+const config = require("../config/config")
+const materiasRoutes = require('../routes/materias')
+const { router } = require("../controllers/router")
 
-// Ruta para obtener todas las materias
-app.get('/materias', async (req, res) => {
-    try {
-      const materias = await Materia.find()
-      res.json(materias) // Envía las materias como respuesta en formato JSON
-    } catch (error) {
-      res.status(500).json({ message: `${error.message}`})
-    }
-  })
+router.use("/api", materiasRoutes)
 
-app.listen(app.get('port'), () => {
-    console.log('Aplicacion en el puerto ' + app.get('port'))
+server.use(router)
+
+server.listen(server.get('port') || config.port, () => {
+    console.log('Aplicacion en el puerto ' + server.get('port') || config.port)
 })

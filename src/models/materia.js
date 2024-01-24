@@ -1,46 +1,7 @@
-const mongoose = require('mongoose')
+const { client } = require('../views/database')
 
-const materiaSchema = new mongoose.Schema({
-  Asignatura: {
-    type: String,
-    required: true,
-  },
-  Edificio: {
-    type: String,
-    required: true,
-  },
-  Grupo: {
-    type: String,
-    required: true,
-  },
-  Jue: {
-    type: String,
-  },
-  Lun: {
-    type: String,
-  },
-  Mar: {
-    type: String,
-  },
-  Mie: {
-    type: String,
-  },
-  Profesor: {
-    type: String,
-    required: true,
-  },
-  Sab: {
-    type: String,
-  },
-  Salon: {
-    type: String,
-    required: true,
-  },
-  Vie: {
-    type: String,
-  },
-})
+const database = client.db("upiita")
 
-let Materia = mongoose.model('Materia', materiaSchema)
+const materia = database.collection("telematica")
 
-module.exports = Materia
+module.exports = {database, materia}

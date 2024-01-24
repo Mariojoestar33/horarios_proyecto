@@ -1,11 +1,13 @@
-const mongoose = require('mongoose')
-uri = "mongodb://127.0.0.1:27017/upiita"
+const { MongoClient, ServerApiVersion } = require('mongodb')
+const config = require("../config/config")
 
-async function load() {
-  try {
-    await mongoose.connect(uri)
-  } catch (err) {
-    console.log(`Error: ${err}`)
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(config.dbUri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
   }
-}
+})
 
+module.exports = { client }

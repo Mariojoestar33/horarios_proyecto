@@ -1,10 +1,11 @@
 const express = require('express')
 const path = require('path')
 const port = 3000
+const config = require("../config/config")
 
-const app = express()
+const server = express()
 
-app.set('port', process.env.PORT || port)
-app.set('view', path.join(__dirname, 'views'))
+server.set('port', config.port || port)
+server.set('views', path.join(__dirname, 'views'))
 
-module.exports = app
+module.exports = { server }
