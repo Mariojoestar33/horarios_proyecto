@@ -1,12 +1,12 @@
-const { server } = require("./server")
+const app = require("./server")
 const config = require("../config/config")
 const materiasRoutes = require('../routes/materias')
 const { router } = require("../controllers/router")
 
 router.use("/api", materiasRoutes)
 
-server.use(router)
+app.use(router)
 
-server.listen(server.get('port') || config.port, () => {
-    console.log('Aplicacion en el puerto ' + server.get('port') || config.port)
+app.listen(app.get('port') || config.port, () => {
+    console.log('Aplicacion en el puerto ' + app.get('port') || config.port)
 })

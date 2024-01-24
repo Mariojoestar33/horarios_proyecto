@@ -8,4 +8,4 @@ const server = express()
 server.set('port', config.port || port)
 server.set('views', path.join(__dirname, 'views'))
 
-module.exports = { server }
+module.exports = server 
