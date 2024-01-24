@@ -1,6 +1,6 @@
 const { router } = require("../controllers/router")
 const { client } = require("../views/database")
-const { materia, database } = require("../models/materiaModel")
+const { materia, database } = require("../models/materiamodel")
 const config = require("../config/config")
 
 // Ruta para obtener todas las materias
