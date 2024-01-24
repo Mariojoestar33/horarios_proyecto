@@ -1,13 +1,13 @@
 const { router } = require("../controllers/router")
 const { client } = require("../views/database")
-const { materia } = require("../models/materia")
+const { materia, database } = require("../models/materiaModel")
 const config = require("../config/config")
 
 // Ruta para obtener todas las materias
 router.get('/materias', async (req, res) => {
     try {
       await client.connect()
-      await client.db(config.dbName).command({ ping: 1 })
+      await database.command({ ping: 1 })
       console.log("Conexion EXITOSA a Cluster")
       let query = {}
       let materias = await materia.find(query).toArray()
