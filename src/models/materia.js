@@ -41,6 +41,6 @@ const materiaSchema = new mongoose.Schema({
   },
 })
 
-const Materia = mongoose.model('Materia', materiaSchema)
+let Materia = mongoose.model('Materia', materiaSchema)
 
 module.exports = Materia

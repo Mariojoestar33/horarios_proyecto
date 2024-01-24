@@ -1,24 +1,11 @@
-const {MongoClient} = require('mongoose')
+const mongoose = require('mongoose')
+uri = "mongodb://127.0.0.1:27017/upiita"
 
-const uri = 'mongodb://localhost:27017/upiita'
-
-
-const client = new MongoClient(uri,  {
-    serverApi: {
-        version: '1'
-    }
-})
-
-async function run() {
-    try {
-      // Connect the client to the server (optional starting in v4.7)
-      await client.connect()
-      // Send a ping to confirm a successful connection
-      await client.db("admin").command({ ping: 1 });
-      console.log("Pinged your deployment. You successfully connected to MongoDB!")
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close()
-    }
+async function load() {
+  try {
+    await mongoose.connect(uri)
+  } catch (err) {
+    console.log(`Error: ${err}`)
   }
-  run().catch(console.dir)
+}
+
