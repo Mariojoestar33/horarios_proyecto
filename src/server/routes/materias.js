@@ -1,5 +1,5 @@
 const { router } = require("../controllers/router")
-const { client } = require("../server/database")
+const { client } = require("../database/database")
 const { materia, database } = require("../models/materiamodel")
 const config = require("../config/config")
 
