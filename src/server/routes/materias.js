@@ -32,9 +32,9 @@ router.get('/materias', async (req, res) => {
       await client.connect()
       await database.command({ ping: 1 })
       console.log("Conexion EXITOSA a Cluster")
-      //let query = {}
-      //let materias = await materia.find(query).toArray()
-      const materias = await materia.distinct('Asignatura')
+      let query = {}
+      let materias = await materia.find(query).toArray()
+      //const materias = await materia.distinct('Asignatura')
       if (materias.length === 0) {
         console.log("No se pudieron cargar las materias")
         res.status(404).json({ mensaje: "No se pudieron cargar las materias"})
@@ -68,6 +68,28 @@ router.get(`/materia`, async (req, res) => {
     await client.close()
   }
 })
+
+//Ruta para obtener profesores especificos
+router.get(`/profesor`, async (req, res) => {
+  try {
+    const buscar = req.query.profesor
+    await client.connect()
+    await client.db(config.dbName).command({ ping: 1 })
+    console.log("Conexion EXITOSA a Cluster")
+    let query = {Profesor: `${buscar}`}
+    let profesor = await materia.find(query).toArray()
+    if (profesor.length === 0) {
+      console.log("No se encontraron datos para la materia especificada")
+      res.status(404).json({ mensaje: 'No se encontraron datos para el maestro seleccionado' })
+  } else {
+          console.log("Datos recogidos EXITOSAMENTE")
+          res.json(profesor)
+      }
+  } finally {
+    await client.close()
+  }
+})
+
 
 
 //Ruta para obtener la materia especifica
