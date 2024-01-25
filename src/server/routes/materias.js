@@ -9,14 +9,17 @@ router.get('/materias', async (req, res) => {
       await client.connect()
       await database.command({ ping: 1 })
       console.log("Conexion EXITOSA a Cluster")
-      let query = {}
-      let materias = await materia.find(query).toArray()
+      //let query = {}
+      //let materias = await materia.find(query).toArray()
+      const materias = await materia.distinct('Asignatura')
+      const profesores = await materia.distinct('Profesor')
       if (materias.length === 0) {
         console.log("No se pudieron cargar las materias")
         res.status(404).json({ mensaje: "No se pudieron cargar las materias"})
       } else {
         console.log("Datos recogidos EXITOSAMENTE")
-        res.json(materias)
+        res.render('index', { pageTitle: "Materias", materias, profesores })
+        //res.json(materias)
       }
     } finally {
       await client.close()

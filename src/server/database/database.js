@@ -5,7 +5,7 @@ const config = require("../config/config")
 const client = new MongoClient(config.dbUri, {
   serverApi: {
     version: ServerApiVersion.v1,
-    strict: true,
+    strict: false,
     deprecationErrors: true,
   }
 })

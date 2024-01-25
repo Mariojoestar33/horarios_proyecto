@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./layouts/head') %>
+    <body class="bg-light">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form action="/materias" method="get" class="mb-3">
+                        <label for="materiaSelect">Selecciona una materia:</label>
+                        <div class="input-group">
+                            <select id="materiaSelect" name="materia" class="form-control">
+                                <% materias.forEach(materia => { %>
+                                    <option value="<%= materia %>"><%= materia %></option>
+                                <% }) %>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form action="/materias/profesor" method="get">
+                        <label for="profesorSelect">Selecciona un profesor:</label>
+                        <div class="input-group">
+                            <select id="profesorSelect" name="profesor" class="form-control">
+                                <% profesores.forEach(profesor => { %>
+                                    <option value="<%= profesor %>"><%= profesor %></option>
+                                <% }) %>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Buscar por Profesor</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
