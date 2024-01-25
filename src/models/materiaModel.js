@@ -1,4 +1,4 @@
-const { client } = require('../views/database')
+const { client } = require('../server/database')
 const config = require("../config/config")
 
 const database = client.db(config.dbName)
