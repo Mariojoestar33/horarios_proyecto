@@ -1,0 +1,30 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.listaSeleccionado {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+}
+
+.elementoSeleccionado {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.div-terminos {
+    text-align: center;
+    font-size: small;
+    background-color: rgb(237, 243, 243);
+}
+
+#barraSeleccion {
+    display: flex;
+    justify-content: space-between;
+}

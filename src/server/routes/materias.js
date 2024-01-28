@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       res.status(404).json({ mensaje: "No se pudieron cargar las materias"})
     } else {
       console.log("Datos recogidos EXITOSAMENTE")
-      res.render('index', { pageTitle: "Materias", materias, profesores })
+      res.render('index', { pageTitle: "Materias Telematica UPIITA", materias, profesores })
       //res.json(materias)
     }
   } finally {
