@@ -18,6 +18,7 @@ $(document).ready(function() {
             // Si no hay materias seleccionadas, elimina el contenido del elemento
             $("#materiasSeleccionadas").empty()
         }
+        localStorage.setItem('materiasSeleccionadas', JSON.stringify(materiasSeleccionadas));
     }
 
     // Función para actualizar el área de profesores seleccionados
@@ -33,6 +34,7 @@ $(document).ready(function() {
             // Si no hay materias seleccionadas, elimina el contenido del elemento
             $("#profesoresSeleccionados").empty()
         }
+        localStorage.setItem('profesoresSeleccionados', JSON.stringify(profesoresSeleccionados))
     }
 
     // Manejar el clic en el botón "Buscar" de materias

@@ -11,6 +11,6 @@ server.set('view engine', 'ejs')
 server.set('trust proxy', 1)
 
 // Configuración para servir archivos estáticos desde la carpeta 'public'
-server.use(express.static(path.join(__dirname, '../public')))
+server.use(express.static(path.join(__dirname, '../../public')))
 
 module.exports = server
