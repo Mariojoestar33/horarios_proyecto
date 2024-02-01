@@ -18,7 +18,8 @@ $(document).ready(function() {
             // Si no hay materias seleccionadas, elimina el contenido del elemento
             $("#materiasSeleccionadas").empty()
         }
-        localStorage.setItem('materiasSeleccionadas', JSON.stringify(materiasSeleccionadas));
+        $("#materiasSeleccionadasInput").val(JSON.stringify(materiasSeleccionadas))
+        console.log(materiasSeleccionadas)
     }
 
     // Función para actualizar el área de profesores seleccionados
@@ -34,7 +35,7 @@ $(document).ready(function() {
             // Si no hay materias seleccionadas, elimina el contenido del elemento
             $("#profesoresSeleccionados").empty()
         }
-        localStorage.setItem('profesoresSeleccionados', JSON.stringify(profesoresSeleccionados))
+        console.log(profesoresSeleccionados)
     }
 
     // Manejar el clic en el botón "Buscar" de materias
@@ -54,7 +55,7 @@ $(document).ready(function() {
             profesoresSeleccionados.push(selectedProfesor)
             actualizarProfesoresSeleccionados()
         }
-    });
+    })
 
     // Manejar el clic en el botón "Eliminar"
     $(document).on("click", ".eliminarBtn", function() {
@@ -73,4 +74,5 @@ $(document).ready(function() {
             actualizarProfesoresSeleccionados()
         }
     })
+
 })
