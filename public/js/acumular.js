@@ -35,6 +35,7 @@ $(document).ready(function() {
             // Si no hay materias seleccionadas, elimina el contenido del elemento
             $("#profesoresSeleccionados").empty()
         }
+        $("#profesoresSeleccionadasInput").val(JSON.stringify(profesoresSeleccionados))
         console.log(profesoresSeleccionados)
     }
 
