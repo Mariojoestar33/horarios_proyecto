@@ -26,6 +26,62 @@ router.get('/', async (req, res) => {
   }
 })
 
+// Ruta para obtener la lista de materias especificas
+router.get(`/materia`, async (req, res) => {
+  let as = req.query.materiasSeleccionadasInput
+  if (!as) {
+    return res.status(404).json({ mensaje: "No se seleccionaron materias"})
+  } else {
+      let listaMaterias = as.split(',').map(nombre => nombre.replace(/[\[\]"]/g, '').trim())
+      try {
+        await client.connect()
+        await client.db(config.dbName).command({ ping: 1 })
+        let consultas = listaMaterias.map(async (nombre) => {
+          console.log("Materia: " +nombre)
+          return await materia.find({ Asignatura: nombre }).toArray()
+        })
+        let materias = await Promise.all(consultas)
+        if (materias.length === 0) {
+          console.log("No se encontraron datos para las materias especificadas")
+          return res.status(404).json({ mensaje: 'No se encontraron datos para las materias especificadas' })
+        } else {
+          console.log("Datos recogidos EXITOSAMENTE")
+          res.json(materias)
+        }
+      } finally {
+        await client.close()
+      }
+    }
+})
+
+// Ruta para obtener la lista de profesires especificos
+router.get(`/profesor`, async (req, res) => {
+  let as = req.query.profesoresSeleccionadasInput
+  if (!as) {
+    return res.status(404).json({ mensaje: "No se seleccionaron profesores"})
+  } else {
+      let listaProfesores = as.split(',').map(nombre => nombre.replace(/[\[\]"]/g, '').trim())
+      try {
+        await client.connect()
+        await client.db(config.dbName).command({ ping: 1 })
+        let consultas = listaProfesores.map(async (nombre) => {
+          console.log("Profesor: " +nombre)
+          return await materia.find({ Profesor: nombre }).toArray()
+        })
+        let profesores = await Promise.all(consultas)
+        if (profesores.length === 0) {
+          console.log("No se encontraron datos para los profesores especificados.")
+          return res.status(404).json({ mensaje: 'No se encontraron datos para los profesores especificados.' })
+        } else {
+          console.log("Datos recogidos EXITOSAMENTE")
+          res.json(profesores)
+        }
+      } finally {
+        await client.close()
+      }
+    }
+})
+
 // Ruta para obtener todas las materias
 router.get('/materias', async (req, res) => {
   try {
@@ -46,63 +102,6 @@ router.get('/materias', async (req, res) => {
   } finally {
     await client.close()
   }
-})
-
-// Ruta para obtener la materia especifica
-router.get(`/materia`, async (req, res) => {
-  let as = req.query.materiasSeleccionadasInput
-  if (!as) {
-    return res.status(404).json({ mensaje: "No se seleccionaron materias"})
-  } else {
-      let listaMaterias = as.split(',').map(nombre => nombre.replace(/[\[\]"]/g, '').trim())
-      try {
-        await client.connect()
-        await client.db(config.dbName).command({ ping: 1 })
-        let consultas = listaMaterias.map(async (nombre) => {
-          console.log("Materia: " +nombre)
-          return await materia.find({ Asignatura: nombre }).toArray()
-        })
-        let materias = await Promise.all(consultas)
-        //materias = materias.flat()
-        if (materias.length === 0) {
-          console.log("No se encontraron datos para las materias especificadas")
-          return res.status(404).json({ mensaje: 'No se encontraron datos para las materias especificadas' })
-        } else {
-          console.log("Datos recogidos EXITOSAMENTE")
-          res.json(materias)
-        }
-      } finally {
-        await client.close()
-      }
-    }
-})
-
-// Ruta para obtener la materia especifica
-router.get(`/profesor`, async (req, res) => {
-  let as = req.query.profesoresSeleccionadasInput
-  if (!as) {
-    return res.status(404).json({ mensaje: "No se seleccionaron profesores"})
-  } else {
-      let listaProfesores = as.split(',').map(nombre => nombre.replace(/[\[\]"]/g, '').trim())
-      try {
-        await client.connect()
-        await client.db(config.dbName).command({ ping: 1 })
-        let consultas = listaProfesores.map(async (nombre) => {
-          console.log("Profesor: " +nombre)
-          return await materia.find({ Profesor: nombre }).toArray()
-        })
-        let profesores = await Promise.all(consultas)
-        if (profesores.length === 0) {
-          console.log("No se encontraron datos para las materias especificadas")
-          return res.status(404).json({ mensaje: 'No se encontraron datos para los profesores especificados' })
-        } else {
-          console.log("Datos recogidos EXITOSAMENTE")
-          res.json(profesores)
-        }
-      } finally {
-        await client.close()
-      }
-    }
 })
 
 //Ruta para obtener la materia especifica
