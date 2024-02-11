@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const config = require('./config/config')
 
-const port = config.port || 3000
+const port = config.port
 const server = express()
 
 server.set('port', port)
